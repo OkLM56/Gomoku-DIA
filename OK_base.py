@@ -46,7 +46,12 @@ def afficher_grille(grille):
     for i in range(15):
         print(chr(65 + i), end=" ")  # Affiche les lettres des lignes
         for j in range(15):
-            print(grille[i, j], end=" ")
+            if grille[i,j]==0:
+                print(".", end=" ")
+            elif grille[i,j]==1:
+                print("X", end=" ")
+            else:
+                print("O",end=" ")
         print()
 
 def convertir_coords(coord):
@@ -191,6 +196,7 @@ def minimax(grille, profondeur, maximiser, joueur, alpha, beta):
                     grille[x, y] = joueur
                     score, _ = minimax(grille, profondeur - 1, False, joueur, alpha, beta)
                     grille[x, y] = 0
+                    print(f"Le coup en {x},{y} a un score de {score}")
                     if score > meilleur_score:
                         meilleur_score = score
                         meilleur_coup = (x, y)
